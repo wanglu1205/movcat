@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>BoBoKu</title>
+    <!--<link rel="stylesheet" type="text/css" href="../css/reset.css" />-->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+    <script type="text/javascript" src="../js/iconfont.js"></script>
+    <script src="http://www.jq22.com/jquery/jquery-2.1.1.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
+        function changeqq() {
+            $("#qq").attr("xlink:href", "#icon-qq");
+
+        }
+        function resetqq() {
+            $("#qq").attr("xlink:href", "#icon-weixin-");
+        }
+        function changewb() {
+            $("#wb").attr("xlink:href", "#icon-weibo1");
+        }
+        function resetwb() {
+            $("#wb").attr("xlink:href", "#icon-weibo");
+        }
+
+        //发送验证码
+        var countdown = 60;
+        function settime(obj) {
+            if (countdown == 0) {
+                obj.removeAttribute("disabled");
+                $("#code").text("发送验证码");
+                countdown = 60;
+                return;
+            } else {
+                obj.setAttribute("disabled", true);
+                $("#code").text("重新发送(" + countdown + ")");
+                countdown--;
+            }
+            setTimeout(function() {
+                    settime(obj) }
+                ,1000)
+        }
+    </script>
+    <style type="text/css">
+        .icon {
+            width: 1em; height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+        div.search {padding: 30px 0;}
+
+        form {
+            position: relative;
+            width: 650px;
+            margin: 0 auto;
+        }
+
+
+        /*搜索框5*/
+        .bar5 input, .bar5 button {
+            background: transparent;
+        }
+        .bar5 input {
+            background-color: rgba(10, 10, 10, 0.16);
+            border: none;
+            outline: none;
+            width: 105%;
+            height: 50px;
+            padding-left: 13px;
+            border: 2px solid #fff;
+        }
+        .bar5 button {
+            border: none;
+            outline: none;
+            height: 42px;
+            width: 42px;
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+        .bar5 input:hover {
+            background-color: rgba(10, 10, 10, 0.3);
+        }
+        .cat{
+            position: relative;
+            margin: 0 auto;
+            width: 1285px;
+        }
+        .cat div{
+            float:left;
+            margin: 160px 30px;
+        }
+        .cat img{
+            height: 100px;
+        }
+        .cat p{
+            position: relative;
+            top: 22px;
+            font-size: 10px;
+            text-align: center;
+            color: rgb(93, 78, 24);
+        }
+        /*效果一：360°旋转 修改rotate(旋转度数)*/
+        .cat img:hover{
+            transition: All 0.4s ease-in-out;
+            transform: rotate(40deg);
+        }
+        .title{
+            padding: 10px;
+            font-size: 10px;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 100;
+            position: relative;
+            top: -6px;
+        }
+        .row img{
+            height: 154px;
+            width:213.72px;
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        <span style="position: absolute;left: 200px">
+            <svg class="icon" aria-hidden="true" style="font-size: 32px;margin-left: 25px;margin-top: 9px;">
+                <use xlink:href="#icon-icon-copy-copy"></use>
+            </svg>
+            <span style="font-size: 28px;color: #fff;font-weight: 100;position: relative;top: -1px;">猫爪</span>
+            <span class="title" style="padding-bottom: 5px;border-bottom:  1px solid #fff;margin-left: 12px">首页</span>
+            <span class="title">发现</span>
+            <span class="title">最新</span>
+            <span class="title">活动</span>
+            <span class="title">小喵</span>
+            <span class="title">大喵</span>
+            <svg class="icon" aria-hidden="true" style="font-size: 30px;margin-top: 9px;position: relative;right: 5px;">
+                <use xlink:href="#icon-new4"></use>
+            </svg>
+            <div class="btn-group">
+              <button style="background-color: rgba(0, 255, 255, 0);color: #fff;font-size: 15px;border-color: rgba(46, 109, 164, 0);
+                margin-top: -15px;font-weight: 100;" type="button"
+                      class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                更多 <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" style="background-color: rgba(245, 245, 220, 0.53);min-width: 72px;">
+                <li><a href="#">美思</a></li>
+                <li>
+                    <a href="#">美素</a>
+                </li>
+                <li><a href="#">美体</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">猫爪</a></li>
+              </ul>
+            </div>
+
+        </span>
+        <span style="position: absolute;right: 200px;top: 2%;">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="background-color: rgba(251, 17, 17, 0.65);border-color: rgba(251, 17, 17, 0.65);">
+               登录
+            </button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal_1" style="background: rgba(0, 0, 0, 0);border-color: #fff;margin-left: 5px;">
+               注册
+            </button>
+        </span>
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" style="width: 450px;margin: 0 auto;margin-top: 40%;">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <svg class="icon" aria-hidden="true" style="font-size: 28px;margin-top: 9px;">
+                            <use xlink:href="#icon-icon-copy"></use>
+                        </svg>
+                        <span class="modal-title" id="myModalLabel" style="font-size: 21px;position: relative;top: -3px;left: 2px;">登录</span>
+                    </div>
+                    <div class="modal-body">
+                        <div style="text-align: center;color: rgba(0, 0, 0, 0.35);">——  使用手机号/邮箱登录猫爪  ——</div>
+                        <div class="input-group input-group-lg" style="margin-top: 16px;">
+                            <span class="input-group-addon" id="basic-addon1">
+                                <svg class="icon" aria-hidden="true" style="font-size: 22px;">
+                                  <use xlink:href="#icon-yonghuming1"></use>
+                                </svg>
+                            </span>
+                            <input type="text" class="form-control" placeholder="手机号/邮箱" aria-describedby="basic-addon1" />
+                        </div><br></br>
+                        <div class="input-group  input-group-lg">
+                            <span class="input-group-addon" id="basic-addon2">
+                                <svg class="icon" aria-hidden="true" style="font-size: 22px;">
+                                  <use xlink:href="#icon-mima"></use>
+                                </svg>
+                            </span>
+                            <input type="password" class="form-control" placeholder="密码" aria-describedby="basic-addon2" />
+                        </div>
+                        <div style="margin-top: 10px;">
+                            <span style="margin-left: 2%;"><a href="#">忘记密码>></a></span>
+                        </div>
+                        <div style="text-align: center;color: rgba(0, 0, 0, 0.35);margin-top: 16px;">——  用第三方帐号注册猫爪  ——</div>
+                        <div style="position: relative;margin-top: 15px;left: 38%;">
+                            <svg class="icon" aria-hidden="true" style="font-size: 50px;" th:onmouseover="'javascript:changeqq()'" th:onmouseout="'javascript:resetqq()'">
+                                <use xlink:href="#icon-weixin-" id="qq"></use>
+                            </svg>
+                            <svg class="icon" aria-hidden="true" style="font-size: 50px;" th:onmouseover="'javascript:changewb()'" th:onmouseout="'javascript:resetwb()'">
+                                <use xlink:href="#icon-weibo" id="wb"></use>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <span>还没有猫爪账号?</span>
+                        <span><a href="#" th:onclick="'javascript:gologin()'" style="margin-right: 117px;">立即注册>></a></span>
+                        <button type="button" class="btn btn-primary" style="border-color: #fff;background-color: #fbd34a;width: 110px;">登录</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="myModal_1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel_1">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" style="width: 450px;margin: 0 auto;margin-top: 40%;">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <svg class="icon" aria-hidden="true" style="font-size: 28px;margin-top: 9px;">
+                            <use xlink:href="#icon-icon-copy"></use>
+                        </svg>
+                        <span class="modal-title" id="myModalLabel_1" style="font-size: 21px;position: relative;top: -3px;left: 2px;">注册</span>
+                    </div>
+                    <div class="modal-body">
+                        <div style="text-align: center;color: rgba(0, 0, 0, 0.35);">——  使用手机号/邮箱注册猫爪  ——</div>
+                        <div class="input-group input-group-lg" style="margin-top: 16px;">
+                            <span class="input-group-addon" id="basic-addon5">
+                                <svg class="icon" aria-hidden="true" style="font-size: 22px;">
+                                  <use xlink:href="#icon-yonghuming1"></use>
+                                </svg>
+                            </span>
+                            <input type="text" class="form-control" placeholder="手机号/邮箱" aria-describedby="basic-addon5" />
+                        </div><br></br>
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="basic-addon3">
+                                <svg class="icon" aria-hidden="true" style="font-size: 22px;">
+                                  <use xlink:href="#icon-duanxinyanzhengmax"></use>
+                                </svg>
+                            </span>
+                            <input type="text" class="form-control" placeholder="验证码" aria-describedby="basic-addon3" style="width: 69%;"/>
+                        </div>
+                        <button type="button" th:onclick="'javascript:settime(this)'" id="code"
+                                class="btn btn-primary" autocomplete="off" style="position:
+                                absolute;left: 73%;top: 34%;height: 46px;background-color: #f5ab90;border-color: rgba(0, 0, 0, 0.37);width: 106px;">
+                            发送验证码
+                        </button>
+                        <br></br>
+                        <div class="input-group  input-group-lg">
+                            <span class="input-group-addon" id="basic-addon4">
+                                <svg class="icon" aria-hidden="true" style="font-size: 22px;">
+                                  <use xlink:href="#icon-mima"></use>
+                                </svg>
+                            </span>
+                            <input type="password" class="form-control" placeholder="密码" aria-describedby="basic-addon4" />
+                        </div>
+                        <div style="text-align: center;color: rgba(0, 0, 0, 0.35);margin-top: 16px;">——  用第三方帐号注册猫爪  ——</div>
+                        <div style="position: relative;margin-top: 15px;left: 38%;">
+                            <svg class="icon" aria-hidden="true" style="font-size: 50px;" th:onmouseover="'javascript:changeqq()'" th:onmouseout="'javascript:resetqq()'">
+                                <use xlink:href="#icon-weixin-" id="qq"></use>
+                            </svg>
+                            <svg class="icon" aria-hidden="true" style="font-size: 50px;" th:onmouseover="'javascript:changewb()'" th:onmouseout="'javascript:resetwb()'">
+                                <use xlink:href="#icon-weibo" id="wb"></use>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <span>已有猫爪账号?</span>
+                        <span><a href="#" th:onclick="'javascript:gologin()'" style="margin-right: 130px;">立即登录>></a></span>
+                        <button type="button" class="btn btn-primary" style="border-color: #fff;background-color: #fbd34a;width: 110px;">注册</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="height:520px;background-size: cover;background-image: url('http://hbfile.b0.upaiyun.com/img/home/banner/600676e99ab1f9d0157af0d9f796b4040fdf03991020a3');opacity: 1;background-position: center 0px;">
+        <div style="text-align: center;font-size: 50px;color: #FFF;position: relative;top: 175px;font-weight: 100;">猫爪,  帮您找到您的天命猫</div>
+        <div class="search bar5" style="position: relative;top: 190px;">
+            <form>
+                <input type="text" placeholder="BoBoKu..." />
+                <button type="submit">
+                    <svg class="icon" aria-hidden="true" style="font-size: 28px;margin-left: 25px;margin-top: 9px;">
+                        <use xlink:href="#icon-icon-copy-copy"></use>
+                    </svg>
+                </button>W
+            </form>
+        </div>
+        <div style="text-align: center;position: relative;top: 175px;font-size: 15px;">
+            <span style="color: #ddd">热门搜索：</span>W
+            <span>
+                <a style="color: #fff">花瓣认证设计师</a>&nbsp;&nbsp;
+                <a style="color: #fff">原创插画</a>&nbsp;&nbsp;
+                <a style="color: #fff">花瓣LIVE</a>&nbsp;&nbsp;
+                <a style="color: #fff">花瓣LIVE</a>&nbsp;&nbsp;
+            </span>
+        </div>
+    </div>
+    <div>
+        <div style="border-top: 1px solid #ededed;
+    position: relative;
+    top: 32px;
+    width: 28%;
+    left: 323px;"></div>
+        <div style="text-align: center;
+    font-size: 15px;
+    margin-top: 20px;
+    color: rgba(0, 0, 0, 0.38);">大家正在关注</div>
+        <div style="border-top: 1px solid #ededed;
+    position: relative;
+    top: -10px;
+    width: 28%;
+    right: -1045px;"></div>
+    </div>
+    <div class="row" style="max-width: 80%;
+    margin: 15px auto;">
+        <div class="col-xs-6 col-md-2">
+            <a href="#" class="thumbnail">
+                <img src="http://hbimg-other.b0.upaiyun.com/img/promotion/a886655a813a1342d295ad51d981991bae1705ca1f86e" alt="..." />
+            </a>
+        </div>
+        <div class="col-xs-6 col-md-2">
+            <a href="#" class="thumbnail">
+                <img src="http://hbimg-other.b0.upaiyun.com/img/promotion/ca69d29c6e407feb0455a9ecd49f3d8dc80178a78bd6" alt="..." />
+            </a>
+        </div>
+        <div class="col-xs-6 col-md-2">
+            <a href="#" class="thumbnail">
+                <img src="http://pagead2.googlesyndication.com/simgad/8573399779390812097" alt="..." />
+            </a>
+        </div>
+        <div class="col-xs-6 col-md-2">
+            <a href="#" class="thumbnail">
+                <img src="http://upyun.h800.com.cn/content/1510710736765.jpg" alt="..." />
+            </a>
+        </div>
+        <div class="col-xs-6 col-md-2">
+            <a href="#" class="thumbnail">
+                <img src="http://liontest001.b0.upaiyun.com/content/1509002735222.jpg!content" alt="..." />
+            </a>
+        </div>
+        <div class="col-xs-6 col-md-2">
+            <a href="#" class="thumbnail">
+                <img src="http://liontest001.b0.upaiyun.com/content/1509002902991.jpg!content" alt="..." />
+            </a>
+        </div>
+    </div>
+
+    <div style="text-align: center;font-size: 15px;
+    margin-top: 20px;
+    color: rgba(0, 0, 0, 0.38);">为您推荐</div>
+    <!--<div style="height: 350px;">
+        <div class="cat" style="margin: -140px auto;">
+            <div th:each="variety : ${varietyList}">
+                <a href="javascript:void(0);" th:onclick="'javascript:goDetail('+${variety.id}+')'">
+                    <img th:src="${variety.img}" />
+                    <p th:text="${variety.englishName}" />
+                    <p th:text="${variety.name}" />
+                </a>
+            </div>
+        </div>
+        <div>
+            <a href="#">
+                <svg class="icon" aria-hidden="true" style="  font-size: 20px;margin-top: 250px;margin-left: 34px;">
+                    <use xlink:href="#icon-gengduo"></use>
+                </svg>
+            </a>
+        </div>
+    </div>-->
+</body>
+</html>

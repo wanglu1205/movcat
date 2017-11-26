@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <script type="text/javascript" src="../js/iconfont.js"></script>
+    <style type="text/css">
+        .icon {
+            width: 1em; height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+            font-size: 28px;
+            margin-left: 10px;
+            margin-top: 3px;
+        }
+    </style>
+</head>
+<body>
+    <!--<div>
+        <div th:text="${variety.name}"></div>
+    </div>-->
+        <div style="position: relative">
+            <div style="text-align: center">
+                <img th:src="${variety.img}" style="position:absolute;margin-left: -514px;margin-top: -18px;width:100px; height:100px; border-radius:50%; overflow:hidden;border-color: #ff7e41;" border="8" />
+            </div>
+            <div style=" margin-top:10px;height: 80px;width: 1000px;background-color: #ff7e41;border-radius: 40px;margin: 175px auto;">
+                <span style="line-height: 80px;font-size: 30px;margin-left: 132px;" th:text="${variety.name}"></span>
+            </div>
+            <div style="position: absolute;right: 440px;top: 25px;">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-liulanliang"></use>
+                </svg>
+                <span style="font-size: 10px;position: relative;top: -5px;color: aliceblue;">1924</span>
+            </div>
+            <div style="position: absolute;right: 400px;top: 25px;">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-fenxiang"></use>
+                </svg>
+            </div>
+        </div>
+</body>
+</html>
