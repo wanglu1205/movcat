@@ -5,13 +5,39 @@
     <title>BoBoKu</title>
     <!--<link rel="stylesheet" type="text/css" href="../css/reset.css" />-->
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="../css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="../css/component.css" />
     <script type="text/javascript" src="../js/iconfont.js"></script>
+    <script src="../js/modernizr.custom.js"></script>
+    <script src="../js/masonry.pkgd.min.js"></script>
+    <script src="../js/imagesloaded.pkgd.min.js"></script>
+    <script src="../js/classie.js"></script>
+    <script src="../js/colorfinder-1.1.js"></script>
+    <script src="../js/gridScrollFx.js"></script>
     <script src="http://www.jq22.com/jquery/jquery-2.1.1.js"></script>
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
     <script>
         $(function () {
-            $('[data-toggle="popover"]').popover()
+            new GridScrollFx( document.getElementById( 'grid' ), {
+                viewportFactor : 0.4
+            } );
+            $(window).scroll(function() {
+                var x=document.body.scrollTop;
+                if (x > 200){
+                    $("#navigation").css("background-color", "rgba(0, 0, 0, 0.51)");
+                    $("#navigation").css("box-shadow", "0 0 4px rgba(0,0,0,.2)");
+                }else {
+                    $("#navigation").css("background-color", "rgba(0, 0, 0, 0)");
+                    $("#navigation").css("box-shadow", "none");
+                }
+
+            });
+
+            $('[data-toggle="popover"]').popover();
+            $('[data-toggle="tooltip"]').tooltip();
         })
+
         function changeqq() {
             $("#qq").attr("xlink:href", "#icon-qq");
 
@@ -43,6 +69,18 @@
                     settime(obj) }
                 ,1000)
         }
+        
+        function openjudge() {
+            $("#judgeText_1").css("display", "none");
+            $("#judgeText").css("display", "block");
+        }
+        
+        function login() {
+            var logintelvalue = $("#logintel").val();
+            if (logintelvalue == ''){
+                $(".cue").text("手机号或邮箱不能为空");
+            }
+        }
     </script>
     <style type="text/css">
         .icon {
@@ -58,8 +96,6 @@
             width: 650px;
             margin: 0 auto;
         }
-
-
         /*搜索框5*/
         .bar5 input, .bar5 button {
             background: transparent;
@@ -84,7 +120,7 @@
             right: 0;
         }
         .bar5 input:hover {
-            background-color: rgba(10, 10, 10, 0.3);
+            background-color: rgba(10, 10, 10, 0.7);
         }
         .cat{
             position: relative;
@@ -123,50 +159,107 @@
             height: 154px;
             width:213.72px;
         }
+        #navigation{
+            position: fixed;
+            width: 100%;
+            height: 51px;
+            z-index: 100;
+        }
+        .row_1 img{
+            height: 126.86px;
+            width: 126.86px;
+        }
+        .row_1 .back{
+            background-color: rgba(227, 241, 183, 0.19);
+            width: 126.86px;
+            height: 126.86px;
+        }
+        .row_1 .back:hover{
+            background-color: rgba(227, 241, 183, 0.5);
+        }
+        .character{
+            text-align: center;
+            position: relative;
+            top: 25px;
+            color: rgba(177, 174, 174, 0.68);
+        }
+        .name{
+            text-align: center;
+            position: relative;
+            top: 20px;
+            color: rgba(0, 0, 0, 0.44);
+        }
+        #grid li{
+            width: 250px;
+        }
+        .ul{
+            list-style: none;
+            text-align: center;
+        }
+        .ul li{
+            padding: 5px 0;
+            float: left;
+            width: 304px;
+        }
+        .di a{
+            width: 200px;
+            display: inline-block;
+            vertical-align: top;
+            padding-bottom: 20px;
+            font-size: 16px;
+        }
+        .cue{
+            color: #ff0000;
+            position: absolute;
+            right: 22px;
+        }
     </style>
 </head>
-<body>
-
+<body style="height: 2000px;">
     <div>
-        <span style="position: absolute;left: 200px">
-            <svg class="icon" aria-hidden="true" style="font-size: 32px;margin-left: 25px;margin-top: 9px;">
-                <use xlink:href="#icon-icon-copy-copy"></use>
-            </svg>
-            <span style="font-size: 28px;color: #fff;font-weight: 100;position: relative;top: -1px;">猫爪</span>
-            <span class="title" style="padding-bottom: 5px;border-bottom:  1px solid #fff;margin-left: 12px">首页</span>
-            <span class="title">发现</span>
-            <span class="title">最新</span>
-            <span class="title">活动</span>
-            <span class="title">小喵</span>
-            <span class="title">大喵</span>
-            <svg class="icon" aria-hidden="true" style="font-size: 30px;margin-top: 9px;position: relative;right: 5px;">
-                <use xlink:href="#icon-new4"></use>
-            </svg>
-            <div class="btn-group">
-              <button style="background-color: rgba(0, 255, 255, 0);color: #fff;font-size: 15px;border-color: rgba(46, 109, 164, 0);
-                margin-top: -15px;font-weight: 100;" type="button"
-                      class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                更多 <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" style="background-color: rgba(245, 245, 220, 0.53);min-width: 72px;">
-                <li><a href="#">美思</a></li>
-                <li>
-                    <a href="#">美素</a>
-                </li>
-                <li><a href="#">美体</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">猫爪</a></li>
-              </ul>
-            </div>
-
+        <span id="navigation">
+            <span style="margin-left: 200px;">
+                <svg class="icon" aria-hidden="true" style="font-size: 32px;margin-left: 25px;margin-top: 9px;">
+                    <use xlink:href="#icon-icon-copy-copy"></use>
+                </svg>
+                <span style="font-size: 28px;color: #fff;font-weight: 100;position: relative;top: -1px;">猫爪</span>
+                <span class="title" style="padding-bottom: 5px;border-bottom:  1px solid #fff;margin-left: 12px">首页</span>
+                <span class="title">发现</span>
+                <span class="title">最新</span>
+                <span class="title">活动</span>
+                <span class="title">小喵</span>
+                <span class="title">大喵</span>
+                <svg class="icon" aria-hidden="true" style="font-size: 30px;margin-top: 9px;position: relative;right: 5px;">
+                    <use xlink:href="#icon-new4"></use>
+                </svg>
+                <div class="btn-group">
+                  <button style="background-color: rgba(0, 255, 255, 0);color: #fff;font-size: 15px;border-color: rgba(46, 109, 164, 0);
+                    margin-top: -15px;font-weight: 100;" type="button"
+                          class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    更多 <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" style="background-color: rgba(245, 245, 220, 0.53);min-width: 72px;">
+                    <li><a href="#">美思</a></li>
+                    <li>
+                        <a href="#">美素</a>
+                    </li>
+                    <li><a href="#">美体</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">猫爪</a></li>
+                  </ul>
+                </div>
+            </span>
+            <span style="position: absolute;right: 200px;top: 8px;">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="background-color: rgba(251, 17, 17, 0.65);border-color: rgba(251, 17, 17, 0.65);">
+                    登录
+                </button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal_1" style="background: rgba(0, 0, 0, 0);border-color: #fff;margin-left: 5px;">
+                    注册
+                </button>
+            </span>
         </span>
-        <span style="position: absolute;right: 200px;top: 2%;">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="background-color: rgba(251, 17, 17, 0.65);border-color: rgba(251, 17, 17, 0.65);">
-               登录
-            </button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal_1" style="background: rgba(0, 0, 0, 0);border-color: #fff;margin-left: 5px;">
-               注册
-            </button>
+        <span style="position: absolute;right: 200px;top: 8px;">
+
         </span>
 
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -187,7 +280,7 @@
                                   <use xlink:href="#icon-yonghuming1"></use>
                                 </svg>
                             </span>
-                            <input type="text" class="form-control" placeholder="手机号/邮箱" aria-describedby="basic-addon1" />
+                            <input type="text" class="form-control" placeholder="手机号/邮箱" aria-describedby="basic-addon1" id="logintel" />
                         </div><br></br>
                         <div class="input-group  input-group-lg">
                             <span class="input-group-addon" id="basic-addon2">
@@ -195,10 +288,10 @@
                                   <use xlink:href="#icon-mima"></use>
                                 </svg>
                             </span>
-                            <input type="password" class="form-control" placeholder="密码" aria-describedby="basic-addon2" />
+                            <input type="password" class="form-control" placeholder="密码" aria-describedby="basic-addon2" id="loginpassword" />
                         </div>
                         <div style="margin-top: 10px;">
-                            <span style="margin-left: 2%;"><a href="#">忘记密码>></a></span>
+                            <span style="margin-left: 2%;"><a href="#">忘记密码>></a></span><span class="cue"></span>
                         </div>
                         <div style="text-align: center;color: rgba(0, 0, 0, 0.35);margin-top: 16px;">——  用第三方帐号注册猫爪  ——</div>
                         <div style="position: relative;margin-top: 15px;left: 38%;">
@@ -213,7 +306,7 @@
                     <div class="modal-footer">
                         <span>还没有猫爪账号?</span>
                         <span><a href="#" th:onclick="'javascript:gologin()'" style="margin-right: 117px;">立即注册>></a></span>
-                        <button type="button" class="btn btn-primary" style="border-color: #fff;background-color: #fbd34a;width: 110px;">登录</button>
+                        <button type="button" class="btn btn-primary" style="border-color: #fff;background-color: #fbd34a;width: 110px;" th:onclick="'javascript:login()'">登录</button>
                     </div>
                 </div>
             </div>
@@ -303,24 +396,8 @@
             </span>
         </div>
     </div>
-    <div>
-        <div style="border-top: 1px solid #ededed;
-    position: relative;
-    top: 32px;
-    width: 28%;
-    left: 323px;"></div>
-        <div style="text-align: center;
-    font-size: 15px;
-    margin-top: 20px;
-    color: rgba(0, 0, 0, 0.38);">大家正在关注</div>
-        <div style="border-top: 1px solid #ededed;
-    position: relative;
-    top: -10px;
-    width: 28%;
-    right: -1045px;"></div>
-    </div>
-    <div class="row" style="max-width: 80%;
-    margin: 15px auto;">
+    <div style="text-align: center;font-size: 15px;margin-top: 20px;color: rgba(0, 0, 0, 0.38);">大家正在关注</div>
+    <div class="row" style="max-width: 80%;margin: 15px auto;">
         <div class="col-xs-6 col-md-2">
             <a href="#" class="thumbnail">
                 <img src="http://hbimg-other.b0.upaiyun.com/img/promotion/a886655a813a1342d295ad51d981991bae1705ca1f86e" alt="..." />
@@ -356,6 +433,2556 @@
     <div style="text-align: center;font-size: 15px;
     margin-top: 20px;
     color: rgba(0, 0, 0, 0.38);">为您推荐</div>
+    <div> <!--style="background-color: rgba(109, 102, 92, 0.09);"-->
+    <section class="grid-wrap" style="max-width: 80%;">
+        <ul class="grid swipe-down" id="grid">
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/1.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/2.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/3.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/4.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/5.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/6.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/7.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/8.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/9.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/10.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/11.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/12.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/13.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/14.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/1.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/2.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/4.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/3.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/6.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/5.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/11.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/7.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/8.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/10.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/9.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/1.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/2.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/3.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/4.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/5.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/6.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/7.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/8.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/9.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/10.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/11.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/12.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/13.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/14.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/1.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/2.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/4.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/3.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/6.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/5.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/11.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/7.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/8.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/10.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div style="position: relative;overflow: hidden;margin: 7px;box-shadow: 0 1px 1px rgb(146, 132, 132);">
+                    <a href="#/15758125/SQUET-April-2014-issue">
+                        <img src="../img/9.jpg" alt="img02" />
+                    </a>
+                    <div style="background-color: #fff;">
+                        <div style="height: 72px;border-bottom: 1px solid #F2F2F2;">
+                            <div style="position: relative;top: 12px;left: 16px;">十里桃花</div>
+                            <div style="position: relative;left: 16px;top: 18px;">
+                                <svg class="icon" aria-hidden="true" th:onclick="'javascript:openjudge()'">
+                                    <use xlink:href="#icon-wodefankui"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">12</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-jushoucang"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">221</span>&nbsp;&nbsp;
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-tubiao215"></use>
+                                </svg>
+                                <span style="color: rgba(0, 0, 0, 0.31);">3555555</span>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);display: block;min-height: 111px;" id="judgeText_1">
+                            <img src="../img/13.jpg" style="width: 35px;height: 35px;"/>
+                            <div style="margin-left: 45px;margin-top: -35px;max-width: 163px;word-wrap:break-word">
+                                <div style="color: rgba(232, 98, 98, 0.84);">王璐:</div>
+                                <div>权力的游戏》是一部中世纪史诗奇幻题材的电视连续剧,该剧以美国作家...</div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px;border-bottom: 1px solid #F2F2F2;background-color: rgba(0, 0, 0, 0.02);height: 111px;display: none;" id="judgeText">
+                            <img src="../img/11.jpg" style="width: 35px;height: 35px;"/>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" style="position: relative;left: 45px;top: -35px;width: 158px;height: 35px;"/>
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" style="position: absolute;
+                        margin-left: 125px;
+                        margin-top: -25px;
+                        border-color: rgba(255, 39, 39, 0.79);
+                        background-color: rgba(255, 39, 39, 0.79);
+                        border-radius: 0;
+                        padding: 4px 10px;">
+                                添加评论
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </section>
+    </div>
+    <div style="width: 82%;margin: 0 auto;">
+        <div style="position: relative;">
+            <span>以分类浏览猫爪</span><span style="position: absolute;right: 0px;">所有>></span>
+        </div>
+        <div style="margin-bottom: 20px;padding-bottom: 5px;border-bottom: 2px solid #ededed;"></div>
+    </div>
+    <div style="height: 225px;">
+        <ul class="ul">
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+            <li><a href="#">UI/UX</a></li>
+        </ul>
+    </div>
+    <div style="height: 200px;background-color: #333;">
+        <!--<div style="width: 80%;text-align: center;position: relative;top: 35px;">
+            <div class="di">
+                <a>猫爪首页</a>
+                <a>猫爪首页</a>
+                <a>猫爪首页</a>
+            </div>
+            <div class="di">
+                <a>猫爪首页</a>
+                <a>猫爪首页</a>
+                <a>猫爪首页</a>
+            </div>
+            <div class="di">
+                <a>猫爪首页</a>
+                <a>猫爪首页</a>
+                <a>猫爪首页</a>
+            </div>
+        </div>-->
+    </div>
+    <div style="height: 60px;background-color: #000;">
+
+    </div>
+    <!--<div class="row_1" style="max-width: 80%;margin: 15px auto;">
+        <div class="col-xs-6 col-md-1" style="padding-right: 0;padding-left: 0;">
+            <a href="#" class="thumbnail" style="padding: 0;border: none;">
+                <img src="../img/1.jpg" alt="..." />
+            </a>
+        </div>
+        <div class="col-xs-6 col-md-1" style="padding-right: 0;padding-left: 0;">
+            <div class="tra-left" style="background: url('http://huaban.com/img/new_index/info_tra.svg') no-repeat;"></div>
+            <div class="back">
+                <div class="name">苏格兰折耳猫</div>
+                <div class="character">温和、聪明</div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-1" style="padding-right: 0;padding-left: 0;">
+            <a href="#" class="thumbnail" style="padding: 0;border: none;">
+                <img src="../img/2.jpg" alt="..." />
+            </a>
+        </div>
+        <div class="col-xs-6 col-md-1" style="padding-right: 0;padding-left: 0;">
+            <div class="back">
+                <div class="name">英国短毛猫</div>
+                <div class="character">温柔、好奇</div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-1" style="padding-right: 0;padding-left: 0;">
+            <a href="#" class="thumbnail" style="padding: 0;border: none;">
+                <img src="../img/3.jpg" alt="..." />
+            </a>
+        </div>
+        <div class="col-xs-6 col-md-1" style="padding-right: 0;padding-left: 0;">
+            <div class="back">
+                <div class="name">苏格兰折耳猫</div>
+                <div class="character">温和、聪明</div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-1" style="padding-right: 0;padding-left: 0;">
+            <a href="#" class="thumbnail" style="padding: 0;border: none;">
+                <img src="../img/4.jpg" alt="..." />
+            </a>
+        </div>
+        <div class="col-xs-6 col-md-1" style="padding-right: 0;padding-left: 0;">
+            <div class="back">
+                <div class="name">苏格兰折耳猫</div>
+                <div class="character">温和、聪明</div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-1" style="padding-right: 0;padding-left: 0;">
+            <a href="#" class="thumbnail" style="padding: 0;border: none;">
+                <img src="../img/5.jpg" alt="..." />
+            </a>
+        </div>
+        <div class="col-xs-6 col-md-1" style="padding-right: 0;padding-left: 0;">
+            <div class="back">
+                <div class="name">苏格兰折耳猫</div>
+                <div class="character">温和、聪明</div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-1" style="padding-right: 0;padding-left: 0;">
+            <a href="#" class="thumbnail" style="padding: 0;border: none;">
+                <img src="../img/6.jpg" alt="..." />
+            </a>
+        </div>
+        <div class="col-xs-6 col-md-1" style="padding-right: 0;padding-left: 0;">
+            <div class="back">
+                <div class="name">苏格兰折耳猫</div>
+                <div class="character">温和、聪明</div>
+            </div>
+        </div>
+    </div>-->
+
     <!--<div style="height: 350px;">
         <div class="cat" style="margin: -140px auto;">
             <div th:each="variety : ${varietyList}">
